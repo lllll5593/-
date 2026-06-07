@@ -1,0 +1,16 @@
+{
+  "build": {
+    "type": "pip",
+    "entry": "main.py"
+  },
+  "run": {
+    "command": "python main.py"
+  },
+  "ports": [
+    {
+      "id": "web",
+      "port": 8000,
+      "type": "HTTP"
+    }
+  ]
+}
