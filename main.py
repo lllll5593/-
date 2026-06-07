@@ -1,5 +1,6 @@
 import os
 import httpx
+import uvicorn
 from mcp.server.fastmcp import FastMCP
 
 API_KEY = os.environ.get("QWEATHER_API_KEY", "")
