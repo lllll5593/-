@@ -17,7 +17,6 @@ async def qweather_get(path: str, params: dict) -> dict:
 
 
 async def get_location_id(city: str) -> tuple[str, str]:
-    """用城市名查询LocationID，返回 (location_id, 城市全名)"""
     async with httpx.AsyncClient() as client:
         r = await client.get(
             "https://geoapi.qweather.com/v2/city/lookup",
@@ -78,7 +77,7 @@ async def get_weather_hourly(city: str) -> str:
     if data.get("code") != "200":
         return f"查询失败，错误码：{data.get('code')}"
     lines = [f"⏱ {full_name} 未来24小时预报\n"]
-    for h in data["hourly"][:12]:  # 取前12小时
+    for h in data["hourly"][:12]:
         lines.append(f"{h['fxTime'][11:16]}  {h['text']}  {h['temp']}°C  💨{h['windDir']}{h['windScale']}级")
     return "\n".join(lines)
 
@@ -116,4 +115,5 @@ async def get_weather_warning(city: str) -> str:
 
 
 if __name__ == "__main__":
-    mcp.run(transport="streamable-http")
+    port = int(os.environ.get("PORT", 8000))
+    mcp.run(transport="streamable-http", host="0.0.0.0", port=port)
