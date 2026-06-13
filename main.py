@@ -6,7 +6,8 @@ from mcp.server.fastmcp import FastMCP
 API_KEY = os.environ.get("QWEATHER_API_KEY", "")
 BASE_URL = "https://devapi.qweather.com/v7"
 
-mcp = FastMCP("weather", allowed_hosts=["*"])
+mcp = FastMCP("weather")
+
 
 
 async def qweather_get(path: str, params: dict) -> dict:
@@ -118,5 +119,7 @@ async def get_weather_warning(city: str) -> str:
 
 if __name__ == "__main__":
     app = mcp.sse_app()
-    uvicorn.run(app, host="0.0.0.0", port=8000, forwarded_allow_ips="*")
+    uvicorn.run(app, host="0.0.0.0", port=8000, 
+                forwarded_allow_ips="*",
+                proxy_headers=True)
 
