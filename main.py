@@ -6,7 +6,7 @@ from mcp.server.fastmcp import FastMCP
 API_KEY = os.environ.get("QWEATHER_API_KEY", "")
 BASE_URL = "https://devapi.qweather.com/v7"
 
-mcp = FastMCP("weather")
+mcp = FastMCP("weather", allowed_hosts=["*"])
 
 
 async def qweather_get(path: str, params: dict) -> dict:
