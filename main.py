@@ -119,7 +119,10 @@ async def get_weather_warning(city: str) -> str:
 
 if __name__ == "__main__":
     import os
+    import uvicorn
     port = int(os.environ.get("PORT", 8000))
-    mcp.run(transport="streamable-http", host="0.0.0.0", port=port)
+    mcp.settings.transport_security = None
+    app = mcp.streamable_http_app()
+    uvicorn.run(app, host="0.0.0.0", port=port, proxy_headers=True, forwarded_allow_ips="*")
 
 
