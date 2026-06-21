@@ -4,7 +4,7 @@ import uvicorn
 from mcp.server.fastmcp import FastMCP
 
 API_KEY = os.environ.get("QWEATHER_API_KEY", "")
-BASE_URL = "https://devapi.qweather.com/v7"
+BASE_URL = "https://mt67cfqecr.re.qweatherapi.com"
 
 mcp = FastMCP("weather")
 
@@ -22,7 +22,7 @@ async def get_location_id(city: str) -> tuple[str, str]:
     """用城市名查询LocationID，返回 (location_id, 城市全名)"""
     async with httpx.AsyncClient() as client:
         r = await client.get(
-            "https://geoapi.qweather.com/v2/city/lookup",
+            "https://mt67cfqecr.re.qweatherapi.com",
             params={"location": city, "key": API_KEY, "lang": "zh"},
             timeout=10,
         )
